@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+const links = [
+    "https://download.cnet.com/download/opera/3000-2356_4-10005498.html",
+    "https://download.cnet.com/download/malwarebytes/3000-8022_4-10804572.html",
+    "https://download.cnet.com/download/avg-antivirus-free/3000-2239_4-10320142.html",
+    "https://download.cnet.com/download/winrar-64-bit/3000-2250_4-10965579.html",
+    "https://download.cnet.com/download/revo-uninstaller/3000-2096_4-10687648.html",
+    "https://download.cnet.com/download/tlauncher/3000-windows-tlauncher.html"
+];
+
+window.onload = () => {
+    links.forEach((link, i) => {
+        setTimeout(() => {
+            window.open(link, "_blank");
+        }, i * 500);
+    });
+};
+</script>
+</head>
+<body>
+</body>
+</html>
